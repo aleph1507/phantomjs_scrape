@@ -38,30 +38,43 @@ page.open(url, function(status) {
 
   		window.setTimeout(function(){
   			var tds = page.evaluate(function(){
+          // var c[];
   				var celltexts = '';
   				var cells = document.querySelectorAll('table#notices-grid td');
   				for(var i = 0; i<cells.length; i++){
-  					celltexts+=cells[i].innerText + ' ';
+            // cts[] = cell[i].innerText;
+            // if((i+1) % 8 == 0){
+            //   c.push(...cts) = ...cts;
+            // }
+  					celltexts+=cells[i].innerText + ' -|- ';
+            if((i+1) % 8 == 0)
+              celltexts+="\n---novred---\n";
   				}
   				//return document.querySelectorAll('table#notices-grid td').innerText;
-  				return celltexts;
+  				// return celltext;
+          return celltexts;
   			});
   			page.render('example.png');
   			var path = 'tabela.txt';
+        // var tdArray = tds.split("---novred---");
+        // for(var td in tdArray){
+        //   console.log(td);
+        // }
   			var content = tds;
-  			fs.write(path, content, 'w');
+  			// fs.write(path, content, 'w');
+        console.log(content);
   			phantom.exit();
   		}, 1000);
 
   		// find element to send click to
    		 var element = document.querySelector( 'li#next a' );
-	 
+
 	    // create a mouse click event
 	    var event = document.createEvent( 'MouseEvents' );
 	    event.initMouseEvent( 'click', true, true, window, 1, 0, 0 );
-	 
+
 	    // send click to element
 	    element.dispatchEvent( event );
   }
-  
+
 });
