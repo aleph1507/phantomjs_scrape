@@ -1,19 +1,21 @@
+'use strict';
+
 var fs = require('fs');
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'mail@gmail.com',
-    pass: 'mailpassword'
+    user: 'nabavki.info@gmail.com',
+    pass: 'qazxsw.123'
   }
 });
 
 var mailOptions = {
-  from: 'fsxralek@gmail.com',
-  to: 'fsxralek@gmail.com',
-  subject: 'k1',
-  text: 'nova ponuda'
+  from: 'nabvaki.info@gmail.com',
+  to: 'nabavki.info@gmail.com',
+  subject: 'е-набавки',
+  text: 'огласи'
 };
 
 var read = [];
@@ -28,13 +30,13 @@ var first = true;
 fs.readFile(file_emails, 'utf8', function(err, data){
   if(err)
     throw err;
-  this.emails = data.split(',');
+  global.emails = data.split(',');
 });
 
 fs.readFile(file_settings, 'utf8', function(err, data){
   if(err)
     throw err;
-  settings = data.split(',');
+  var settings = data.split(',');
   interval = settings[0];
   for(let i = 1; i<settings.length; i++)
     keywords.push(settings[i].trim());
@@ -42,6 +44,7 @@ fs.readFile(file_settings, 'utf8', function(err, data){
 
 setInterval(() => {
   main();
+console.log(interval);
 }, interval*1000);
 // main()
 
@@ -149,18 +152,18 @@ function main() {
                 //   console.log('maildata : ' + i + ' = ' + mailData[i]);
                 // }
                 var mailText = `
-                                Broj na oglas: ${mailData[0].trim()}\n
-                                Dogovoren organ: ${mailData[1]}\n
-                                Predmet na dogovorot: ${mailData[2]}\n
-                                Vid na dogovorot: ${mailData[3]}\n
-                                Vid na postapka: ${mailData[4].trim()}\n
-                                Datum na objava: ${mailData[5]}\n
-                                Kraen rok: ${mailData[6]}\n`;
+                                Број на оглас: ${mailData[0].trim()}\n
+                                Договорен орган: ${mailData[1]}\n
+                                Предмет на договорот: ${mailData[2]}\n
+                                Вид на договорот: ${mailData[3]}\n
+                                Вид на постапка: ${mailData[4].trim()}\n
+                                Датум на објава: ${mailData[5]}\n
+                                Краен рок: ${mailData[6]}\n`;
                 read.push(dataArr[i]);
                 var mailOptions = {
-                  from: 'fsxralek@gmail.com',
-                  to: 'fsxralek@gmail.com',
-                  subject: 'Oglas broj: ' + mailData[0],
+                  from: 'nabavki.info@gmail.com',
+                  to: 'nabavki.info@gmail.com',
+                  subject: 'Оглас број: ' + mailData[0],
                   text: mailText
                 };
 
